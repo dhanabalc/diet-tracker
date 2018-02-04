@@ -1,0 +1,42 @@
+<div style="float:left; margin:20px; text-align:left">
+  <h2>Add Daily Food</h2>
+  <input type="date" style="margin-bottom:20px">
+  <div>
+    <div *ngIf="foodList && foodList.length">
+      <table style="text-align:left">
+        <thead>
+        <tr>
+          <th>
+            Food Name
+          </th>
+          <th style="padding-left:20px">
+            Quantity
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let food of foodList; let i = index">
+           <td>
+              <input [(ngModel)]="food.name" (blur)="onValidateFoodName(i)" >
+           </td>
+           <td style="padding-left:20px">
+              <input [(ngModel)]="food.quantity" style="width:50px;">
+           </td>
+           <td>
+              <label>{{food.name | convertToUnits}}</label>
+           </td>
+           <td style="padding-left:20px">
+             <button (click)="onRemoveFood(i)">Remove</button>
+           </td>
+        </tr>
+      </tbody>
+      </table>  
+   </div>
+   <div style="float:left; margin-top:20px;margin-left:5px">
+    <button (click)="onAddFood()" style="margin-right:20px">Add New Food</button>  
+    <button *ngIf="foodList && foodList.length" style="margin-right:20px">Save All</button>
+    <button *ngIf="foodList && foodList.length" [routerLink]="['/chart']">View Chart</button>
+  </div>
+  </div>
+</div>
